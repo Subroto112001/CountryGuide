@@ -8,7 +8,7 @@ const CountryRegion = document.querySelector(".CountryRegion");
 const CountryMotherLanguage = document.querySelector(".CountryMotherLanguage");
 const CountryLandArea = document.querySelector(".CountryLandArea");
 const FlagHead = document.querySelector(".NameFlag__CountryFlag");
-
+const Countrypopulation = document.querySelector(".Countrypopulation");
 Button.addEventListener("click", () => {
   const Image = document.createElement("img");
   FlagHead.appendChild(Image);
@@ -25,11 +25,12 @@ https://restcountries.com/v3.1/name/${Inputcountry}?fullText=true`;
   fetch(UrlHolder)
     .then((response) => response.json())
     .then((data) => {
-      CountryName.innerHTML = `${NameOfCountry}`;
+      CountryName.innerHTML = `${data[0].name.common}`;
       Image.src = `${data[0].flags.svg}`;
       CountryCapital.innerHTML = `${data[0].capital[0]}`;
       CountryFullName.innerHTML = `${data[0].name.official}`;
       CountryRegion.innerHTML = `${data[0].region}`;
+      Countrypopulation.innerHTML = `${data[0].population}`;
       CountryMotherLanguage.innerHTML = `${Object.values(data[0].languages)
         .toString()
         .split(",")
@@ -41,7 +42,8 @@ https://restcountries.com/v3.1/name/${Inputcountry}?fullText=true`;
       console.log(data[0].name.common);
       console.log(data[0].name.official);
       console.log(data[0].continents[0]);
-      console.log(data[0].languages.hin);
+      console.log(data[0].population);
+     
       console.log(data[0].area);
       console.log(
         Object.values(data[0].languages).toString().split(",").join(",")
